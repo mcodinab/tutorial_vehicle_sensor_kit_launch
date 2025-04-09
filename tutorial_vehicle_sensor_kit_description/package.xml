@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>sample_sensor_kit_description</name>
+  <name>tutorial_vehicle_sensor_kit_description</name>
   <version>0.41.0</version>
   <description>The sample_sensor_kit_description package</description>
   <maintainer email="ryohsuke.mitsudome@tier4.jp">Ryohsuke Mitsudome</maintainer>
@@ -11,6 +11,9 @@
   <buildtool_depend>ament_cmake_auto</buildtool_depend>
 
   <depend>velodyne_description</depend>
+
+  <exec_depend>ros2_v4l2_camera</exec_depend>
+  <exec_depend>tensorrt_yolo</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

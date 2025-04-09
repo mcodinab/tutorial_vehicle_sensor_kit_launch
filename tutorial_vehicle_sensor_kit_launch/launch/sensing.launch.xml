@@ -29,7 +29,7 @@
 
     <!-- Vehicle Velocity Converter  -->
     <include file="$(find-pkg-share autoware_vehicle_velocity_converter)/launch/vehicle_velocity_converter.launch.xml">
-      <arg name="input_vehicle_velocity_topic" value="/vehicle/status/velocity_status"/>
+      <arg name="input_vehicle_velocity_topic" value="/cmd_vel"/>
       <arg name="output_twist_with_covariance" value="/sensing/vehicle_velocity_converter/twist_with_covariance"/>
     </include>
   </group>
