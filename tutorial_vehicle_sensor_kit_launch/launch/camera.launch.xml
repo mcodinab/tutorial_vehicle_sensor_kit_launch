@@ -4,31 +4,45 @@
 
   <group>
     <push-ros-namespace namespace="camera"/>
-      <!-- Launch ros2_v4l2_camera -->
-      <include file="$(find-pkg-share ros2_v4l2_camera)/launch/v4l2_camera.launch.xml">
-        <arg name="video_device" value="/dev/video0"/>
-        <arg name="image_width" value="640"/>
-        <arg name="image_height" value="480"/>
-        <arg name="framerate" value="30"/>
-      </include>
+    
+    <!-- Launch v4l2_camera -->
+    <include file="$(find-pkg-share v4l2_camera)/launch/v4l2_camera.launch.py">
+      <!-- Path to node parameter config -->
+      <arg name="v4l2_camera_param_path" value="$(find-pkg-share v4l2_camera)/config/v4l2_camera_params.yaml" />
+      
+      <!-- Path to camera calibration yaml -->
+      <arg name="camera_info_url" value="file://$(find-pkg-share v4l2_camera)/config/ost.yaml" />
+      
+      <!-- Container name (optional if you're loading into an existing one) -->
+      <arg name="camera_container_name" value="front_camera_container"/>
+      
+      <!-- Additional camera settings -->
+      <arg name="output_topic" value="camera0/rois0"/>
+      <arg name="video_device" value="/dev/video0"/>
+      <arg name="image_width" value="640"/>
+      <arg name="image_height" value="480"/>
+      <arg name="framerate" value="30"/>
+      <arg name="image_topic" value="image_raw"/>
+      <arg name="camera_name" value="cam0"/>
+    </include>
 
-       <!-- Launch yolo -->
-      <include file="$(find-pkg-share tensorrt_yolo)/launch/yolo.launch.xml">
-        <arg name="image_raw0" value="$(var image_raw0)"/>
-        <arg name="image_raw1" value="$(var image_raw1)"/>
-        <arg name="image_raw2" value="$(var image_raw2)"/>
-        <arg name="image_raw3" value="$(var image_raw3)"/>
-        <arg name="image_raw4" value="$(var image_raw4)"/>
-        <arg name="image_raw5" value="$(var image_raw5)"/>
-        <arg name="image_raw6" value="$(var image_raw6)"/>
-        <arg name="image_raw7" value="$(var image_raw7)"/>
-        <arg name="image_number" value="$(var image_number)"/>
-      </include>
-
+    <!-- Launch YOLO --><!--
+    <include file="$(find-pkg-share tensorrt_yolo)/launch/yolo.launch.xml">
+      <arg name="image_raw0" value="$(var image_raw0)"/>
+      <arg name="image_raw1" value="$(var image_raw1)"/>
+      <arg name="image_raw2" value="$(var image_raw2)"/>
+      <arg name="image_raw3" value="$(var image_raw3)"/>
+      <arg name="image_raw4" value="$(var image_raw4)"/>
+      <arg name="image_raw5" value="$(var image_raw5)"/>
+      <arg name="image_raw6" value="$(var image_raw6)"/>
+      <arg name="image_raw7" value="$(var image_raw7)"/>
+      <arg name="image_number" value="$(var image_number)"/>
+    </include>
+  -->
     <group>
       <push-ros-namespace namespace="traffic_light"/>
 
-      <!-- (usb_cam_node is assumed to have launched on logging PC) -->
+      <!-- Relay camera_info -->
       <node pkg="topic_tools" exec="relay" name="tl_camera_info_relay" output="log">
         <param name="input_topic" value="$(var camera_type)/camera_info"/>
         <param name="output_topic" value="camera_info"/>
@@ -36,7 +50,7 @@
         <param name="reliability" value="best_effort"/>
       </node>
 
-      <!-- Relay image_raw/compressed topic -->
+      <!-- Relay compressed image -->
       <node pkg="topic_tools" exec="relay" name="tl_compressed_image_relay" output="log">
         <param name="input_topic" value="$(var camera_type)/image_raw/compressed"/>
         <param name="output_topic" value="image_raw/compressed"/>

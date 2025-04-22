@@ -2,8 +2,8 @@
   <!-- Params -->
   <arg name="launch_driver" default="true"/>
   <arg name="model" default="Helios"/>
-  <arg name="max_range" default="150.0"/>
-  <arg name="min_range" default="0.2"/>
+  <arg name="max_range" default="30.0"/>
+  <arg name="min_range" default="0.4"/>
   <arg name="sensor_frame" default="robosense"/>
   <arg name="return_mode" default="SingleStrongest"/>
   <arg name="sensor_ip" default="192.168.1.200"/>

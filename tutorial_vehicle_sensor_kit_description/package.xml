@@ -12,7 +12,7 @@
 
   <depend>velodyne_description</depend>
 
-  <exec_depend>ros2_v4l2_camera</exec_depend>
+  <exec_depend>v4l2_camera</exec_depend>
   <exec_depend>tensorrt_yolo</exec_depend>
 
   <export>
