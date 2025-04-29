@@ -1,8 +1,8 @@
 base_link:
   sensor_kit_base_link:
-    x: 0.000000
-    y: 0.000000
-    z: 0.000000
-    roll: 0.000000
-    pitch: 0.000000
-    yaw: 0.000000
+    x: 1.600000 # meter
+    y: 0.0
+    z: 1.421595 # 1.151595m + 0.270m
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0
